@@ -48,6 +48,7 @@ public class BaseDao<T> {
 	public int update(String sql, Object... params) {
 		// 获取连接
 		Connection connection = JDBCUtils.getConnection();
+		// 修改数据库数据受影响的行数，大于0证明修改成功了
 		int count = 0;
 		try {
 			count = queryRunner.update(connection, sql, params);

@@ -1,12 +1,11 @@
-package com.hr.dao;
+package com.hr.service;
 
 import com.hr.bean.User;
 
-public interface UserDao {
+public interface UserService {
 
 	/**
-	 * 登录
-	 * 	sql: select * from users where username=? and password=?
+	 * 登录	
 	 */
 	User getUser(User user);
 	
@@ -17,7 +16,6 @@ public interface UserDao {
 	
 	/**
 	 * 将user信息保存到数据库中
-	 * sql:insert into users(username,password,email) values(?,?,?)
 	 */
 	void saveUser(User user);
 }
