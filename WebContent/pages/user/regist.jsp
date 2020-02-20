@@ -58,7 +58,8 @@
 								<span class="errorMsg"><%=request.getAttribute("msg")==null?"":request.getAttribute("msg") %></span>
 							</div>
 							<div class="form">
-								<form action="RegistServlet">
+								<form action="UserServlet?method=regist" method="post">
+									<!-- <input type="hidden" name="method" value="regist"/> -->	
 									<label>用户名称：</label>
 									<input value="<%=request.getParameter("username")==null?"":request.getParameter("username") %>" class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" id="username" />
 									<br />
