@@ -1,10 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>尚硅谷会员注册页面</title>
-<base href="/BookStore/">
-<script type="text/javascript" src="static/script/jquery-1.7.2.js"></script>
+<%@ include file="/WEB-INF/include/base.jsp" %>
 <script type="text/javascript">
 	$(function(){
 		$("#sub_btn").click(function(){

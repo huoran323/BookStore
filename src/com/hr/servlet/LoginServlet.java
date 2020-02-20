@@ -36,10 +36,10 @@ public class LoginServlet extends HttpServlet {
 		User user = userService.getUser(new User(null, username, password, null));
 		if (user == null) {
 			//登录失败，转发
-			request.getRequestDispatcher("/pages/user/login.html").forward(request, response);
+			request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
 		} else {
 			//登录成功,重定向
-			response.sendRedirect(request.getContextPath() + "/pages/user/login_success.html");
+			response.sendRedirect(request.getContextPath() + "/pages/user/login_success.jsp");
 		}
 	}
 
