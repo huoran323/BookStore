@@ -32,6 +32,7 @@ public class RegistServlet extends HttpServlet {
 		boolean yOn = userService.checkUserName(username);
 		if (yOn) {
 			//用户名存在,转发
+			request.setAttribute("msg", "用户名已存在，请重新输入！");
 			request.getRequestDispatcher("/pages/user/regist.jsp").forward(request, response);
 		} else {
 			//用户名不存在，saveUser();

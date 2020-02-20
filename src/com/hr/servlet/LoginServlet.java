@@ -26,6 +26,9 @@ public class LoginServlet extends HttpServlet {
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		
 		UserService userService = new UserServiceImpl();
 		
 		//1.获取用户名密码
@@ -36,6 +39,8 @@ public class LoginServlet extends HttpServlet {
 		User user = userService.getUser(new User(null, username, password, null));
 		if (user == null) {
 			//登录失败，转发
+			//标记，在域中存放数据
+			request.setAttribute("msg", "用户名或密码输入有误，请重新输入！");
 			request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
 		} else {
 			//登录成功,重定向
