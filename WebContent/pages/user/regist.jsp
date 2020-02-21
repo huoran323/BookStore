@@ -55,13 +55,15 @@
 						<div class="login_box">
 							<div class="tit">
 								<h1>注册尚硅谷会员</h1>
-								<span class="errorMsg"><%=request.getAttribute("msg")==null?"":request.getAttribute("msg") %></span>
+								<%-- <span class="errorMsg"><%=request.getAttribute("msg")==null?"":request.getAttribute("msg") %></span> --%>
+								<span class="errorMsg">${requestScope.msg}</span>
 							</div>
 							<div class="form">
 								<form action="UserServlet?method=regist" method="post">
 									<!-- <input type="hidden" name="method" value="regist"/> -->	
 									<label>用户名称：</label>
-									<input value="<%=request.getParameter("username")==null?"":request.getParameter("username") %>" class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" id="username" />
+									<%-- <input value="<%=request.getParameter("username")==null?"":request.getParameter("username") %>" class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" id="username" /> --%>
+									<input value="${param.username }" class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" id="username" />
 									<br />
 									<br />
 									<label>用户密码：</label>
@@ -73,7 +75,8 @@
 									<br />
 									<br />
 									<label>电子邮件：</label>
-									<input value="<%=request.getParameter("email")==null?"":request.getParameter("email") %>" class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" tabindex="1" name="email" id="email" />
+									<%-- <input value="<%=request.getParameter("email")==null?"":request.getParameter("email") %>" class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" tabindex="1" name="email" id="email" /> --%>
+									<input value="${param.email }" class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" tabindex="1" name="email" id="email" />
 									<br />
 									<br />
 									<label>验证码：</label>
