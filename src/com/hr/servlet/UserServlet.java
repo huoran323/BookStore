@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.hr.bean.User;
 import com.hr.service.UserService;
@@ -27,6 +28,8 @@ public class UserServlet extends BaseServlet {
 	 * @throws IOException
 	 */
 	protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
 		//1.获取用户名密码
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -39,7 +42,8 @@ public class UserServlet extends BaseServlet {
 			request.setAttribute("msg", "用户名或密码输入有误，请重新输入！");
 			request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
 		} else {
-			//登录成功,重定向
+			//登录成功,重定向, 存储用户信息
+			session.setAttribute("user", user);
 			response.sendRedirect(request.getContextPath() + "/pages/user/login_success.jsp");
 		}
 	}
