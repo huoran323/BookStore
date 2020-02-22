@@ -49,4 +49,14 @@
     <servlet-name>BaseServlet</servlet-name>
     <url-pattern>/BaseServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BookServlet</display-name>
+    <servlet-name>BookServlet</servlet-name>
+    <servlet-class>com.hr.servlet.BookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BookServlet</servlet-name>
+    <url-pattern>/BookServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

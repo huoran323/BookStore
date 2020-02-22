@@ -12,11 +12,7 @@
 	<div id="header">
 			<img class="logo_img" alt="" src="static/img/logo.gif" >
 			<span class="wel_word">图书管理系统</span>
-			<div>
-				<a href="pages/manager/book_manager.jsp">图书管理</a>
-				<a href="pages/manager/order_manager.jsp">订单管理</a>
-				<a href="index.jsp">返回商城</a>
-			</div>
+			<%@ include file="/WEB-INF/include/header.jsp" %>
 	</div>
 	
 	<div id="main">
@@ -29,45 +25,18 @@
 				<td>库存</td>
 				<td colspan="2">操作</td>
 			</tr>		
-			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="book_edit.jsp">修改</a></td>
-				<td><a href="#">删除</a></td>
-			</tr>	
-			
-			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="book_edit.jsp">修改</a></td>
-				<td><a href="#">删除</a></td>
-			</tr>	
-			
-			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="book_edit.jsp">修改</a></td>
-				<td><a href="#">删除</a></td>
-			</tr>	
-			
-			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="book_edit.jsp">修改</a></td>
-				<td><a href="#">删除</a></td>
-			</tr>	
+			<c:forEach items="${requestScope.books}" var="book">
+				<tr>
+					<td>${book.title }</td>
+					<td>${book.price }</td>
+					<td>${book.author }</td>
+					<td>${book.sales }</td>
+					<td>${book.stock }</td>
+					<td><a href="book_edit.jsp">修改</a></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+			</c:forEach>
+					
 			
 			<tr>
 				<td></td>
