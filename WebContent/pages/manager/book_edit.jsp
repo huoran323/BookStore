@@ -29,7 +29,7 @@
 		</div>
 		
 		<div id="main">
-			<form action="pages/manager/book_manager.jsp">
+			<form action="BookServlet?method=addBook" method="post">
 				<table>
 					<tr>
 						<td>名称</td>

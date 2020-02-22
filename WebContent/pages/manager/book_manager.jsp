@@ -6,6 +6,20 @@
 <meta charset="UTF-8">
 <title>图书管理</title>
 <%@ include file="/WEB-INF/include/base.jsp" %>
+<script type="text/javascript">
+	
+	$(function() {
+		$(".dela").click(function(){
+			/* 获取删除的title */
+			//var title = $(this).parents("tr").children().html();
+			//两种方式获取title
+			var title = $(this).attr("id");
+			if (confirm("确定删除【"+title+"】吗？") == false) {
+				return false;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	
@@ -33,7 +47,8 @@
 					<td>${book.sales }</td>
 					<td>${book.stock }</td>
 					<td><a href="book_edit.jsp">修改</a></td>
-					<td><a href="#">删除</a></td>
+					<!-- 删除操作 需要将需要删除的id，传过去 -->
+					<td><a class="dela" id="${book.title }" href="BookServlet?method=delBookById&bookId=${book.id}">删除</a></td>
 				</tr>
 			</c:forEach>
 					
@@ -45,7 +60,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><a href="book_edit.jsp">添加图书</a></td>
+				<td><a href="pages/manager/book_edit.jsp">添加图书</a></td>
 			</tr>	
 		</table>
 	</div>

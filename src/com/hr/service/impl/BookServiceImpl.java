@@ -12,8 +12,20 @@ public class BookServiceImpl implements BookService {
 	private BookDao bookDao = new BookDaoImpl();
 	@Override
 	public List<Book> getAllBooks() {
-		// TODO Auto-generated method stub
+		
 		return bookDao.getAllBooks();
+	}
+	
+	@Override
+	public void addBook(Book book) {
+		
+		bookDao.addBook(book);
+	}
+
+	@Override
+	public void delBookById(String id) {
+		
+		bookDao.delBookById(id);
 	}
 
 }

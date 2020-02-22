@@ -8,7 +8,7 @@ public class Book {
 	private double price; //价格
 	private Integer sales; //销量
 	private Integer stock; //库存
-	private String imgPath = "static/img/default.jsp"; //封面图片的路径
+	private String imgPath = "static/img/default.jpg"; //封面图片的路径
 	public Integer getId() {
 		return id;
 	}
@@ -59,7 +59,7 @@ public class Book {
 		this.price = price;
 		this.sales = sales;
 		this.stock = stock;
-		this.imgPath = imgPath;
+		this.imgPath = "static/img/default.jpg";
 	}
 	public Book() {
 		super();
