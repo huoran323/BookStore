@@ -21,4 +21,11 @@ public interface BookDao {
 	 * 删除Book
 	 */
 	public void delBookById(String id);
+	
+	public Book getBookById(String id);
+	
+	/**
+	 * 修改Book
+	 */
+	public void updateBook(Book book);
 }

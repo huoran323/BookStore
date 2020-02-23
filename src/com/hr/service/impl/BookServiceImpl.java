@@ -28,4 +28,16 @@ public class BookServiceImpl implements BookService {
 		bookDao.delBookById(id);
 	}
 
+	@Override
+	public Book getBookById(String id) {
+		
+		return bookDao.getBookById(id);
+	}
+
+	@Override
+	public void updateBook(Book book) {
+		
+		bookDao.updateBook(book);
+	}
+
 }

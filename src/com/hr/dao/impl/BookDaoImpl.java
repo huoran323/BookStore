@@ -11,7 +11,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
 	@Override
 	public List<Book> getAllBooks() {
 		
-		String sql = "select id,title,author,price,stock,img_path from books";
+		String sql = "select id,title,author,price,sales,stock,img_path from books";
 		return this.getBeanList(sql);
 	}
 
@@ -29,6 +29,20 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
 		String sql = "delete from books where id = ?";
 		this.update(sql, id);
 		
+	}
+
+	@Override
+	public Book getBookById(String id) {
+		
+		String sql = "select id,title,author,price,sales,stock,img_path from books where id = ?";
+		return this.getBean(sql, id);
+	}
+
+	@Override
+	public void updateBook(Book book) {
+		
+		String sql = "update books set title=?, author=?, price=?, sales=?, stock=? where id=?";
+		this.update(sql, book.getTitle(), book.getAuthor(), book.getPrice(), book.getSales(), book.getStock(), book.getId());
 	}
 
 }

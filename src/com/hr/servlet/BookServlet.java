@@ -79,4 +79,43 @@ public class BookServlet extends BaseServlet {
 		//跳转
 		response.sendRedirect(request.getContextPath()+"/BookServlet?method=getAllBooks");
 	}
+	
+	/**
+	 * 通过id获取book信息
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void getBookById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String bookId = request.getParameter("bookId");
+		
+		Book bookById = bookService.getBookById(bookId);
+		
+		request.setAttribute("book", bookById);
+		
+		request.getRequestDispatcher("/pages/manager/book_update.jsp").forward(request, response);
+	}
+	
+	/**
+	 * 修改图书信息
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void updateBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String id = request.getParameter("bookId");
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		String price = request.getParameter("price");
+		String sales = request.getParameter("sales");
+		String stock = request.getParameter("stock");
+		
+		bookService.updateBook(new Book(Integer.parseInt(id), title, author, Double.parseDouble(price), Integer.parseInt(sales), Integer.parseInt(stock), null));
+		
+		response.sendRedirect(request.getContextPath()+"/BookServlet?method=getAllBooks");
+	}
 }

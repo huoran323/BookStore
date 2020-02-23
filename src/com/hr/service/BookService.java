@@ -14,4 +14,9 @@ public interface BookService {
 	
 	//删除图书
 	public void delBookById(String id);
+	
+	public Book getBookById(String id);
+	
+	//修改图书
+	public void updateBook(Book book);
 }

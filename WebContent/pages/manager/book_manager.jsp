@@ -46,7 +46,7 @@
 					<td>${book.author }</td>
 					<td>${book.sales }</td>
 					<td>${book.stock }</td>
-					<td><a href="book_edit.jsp">修改</a></td>
+					<td><a href="BookServlet?method=getBookById&bookId=${book.id}">修改</a></td>
 					<!-- 删除操作 需要将需要删除的id，传过去 -->
 					<td><a class="dela" id="${book.title }" href="BookServlet?method=delBookById&bookId=${book.id}">删除</a></td>
 				</tr>
