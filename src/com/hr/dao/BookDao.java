@@ -4,6 +4,7 @@ package com.hr.dao;
 import java.util.List;
 
 import com.hr.bean.Book;
+import com.hr.bean.Page;
 
 public interface BookDao {
 
@@ -28,4 +29,9 @@ public interface BookDao {
 	 * 修改Book
 	 */
 	public void updateBook(Book book);
+	
+	/**
+	 * 实现分页查询Book
+	 */
+	public Page<Book> getBooksByPage(Page<Book> page);
 }

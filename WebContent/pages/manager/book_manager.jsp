@@ -60,7 +60,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><a href="pages/manager/book_edit.jsp">添加图书</a></td>
+				<td><a href="pages/manager/book_update.jsp">添加图书</a></td>
 			</tr>	
 		</table>
 	</div>

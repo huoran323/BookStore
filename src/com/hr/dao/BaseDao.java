@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.hr.util.JDBCUtils;
 
@@ -103,5 +104,26 @@ public class BaseDao<T> {
 			JDBCUtils.releaseConnection(connection);
 		}
 		return list;
+	}
+	
+	/**
+	 * 获取单个值
+	 * @param sql eg: select count(*) from books
+	 * @param params
+	 * @return
+	 */
+	public Object getSingleValue(String sql, Object... params) {
+		// 获取连接
+		Connection connection = JDBCUtils.getConnection();
+		Object o = null;
+		try {
+			o = queryRunner.query(connection, sql, new ScalarHandler<>(),
+					params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.releaseConnection(connection);
+		}
+		return o;
 	}
 }
