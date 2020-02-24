@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hr.bean.Book;
+import com.hr.bean.Page;
 import com.hr.service.BookService;
 import com.hr.service.impl.BookServiceImpl;
 
@@ -26,17 +27,30 @@ public class BookServlet extends BaseServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	protected void getAllBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//	protected void getAllBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//		//调用service中的相应方法
+//		List<Book> allBooks = bookService.getAllBooks();
+//		//将books存放到域中
+//		request.setAttribute("books", allBooks);
+//		//跳转
+//		request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
+//	}
+
+	/**
+	 * 分页查询book
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void getBooksByPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//调用service中的相应方法
-		List<Book> allBooks = bookService.getAllBooks();
-		//将books存放到域中
-		request.setAttribute("books", allBooks);
-		//跳转
+		String pageNo = request.getParameter("pageNo");
+		Page<Book> page = bookService.getBookByPage(pageNo);
+		request.setAttribute("page", page);
 		request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
 	}
-
-
 	
 	/**
 	 * 删除
@@ -54,7 +68,7 @@ public class BookServlet extends BaseServlet {
 		bookService.delBookById(bookId);
 		
 		//跳转
-		response.sendRedirect(request.getContextPath()+"/BookServlet?method=getAllBooks");
+		response.sendRedirect(request.getContextPath()+"/BookServlet?method=getBooksByPage");
 	}
 	
 	/**
@@ -126,6 +140,6 @@ public class BookServlet extends BaseServlet {
 			bookService.updateBook(new Book(Integer.parseInt(id), title, author, Double.parseDouble(price), Integer.parseInt(sales), Integer.parseInt(stock), null));
 		}
 		
-		response.sendRedirect(request.getContextPath()+"/BookServlet?method=getAllBooks");
+		response.sendRedirect(request.getContextPath()+"/BookServlet?method=getBooksByPage");
 	}
 }

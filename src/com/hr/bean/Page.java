@@ -11,6 +11,13 @@ public class Page<T> {
 	private List<T> list; //当前页的数据集合
 	
 	public int getPageNo() {
+		//解决输入的页码在范围之外的问题
+		if (pageNo < 1) {
+			return 1;
+		}
+		if (pageNo > getTotalPageNo()) {
+			return getTotalPageNo();
+		}
 		return pageNo;
 	}
 	public void setPageNo(int pageNo) {

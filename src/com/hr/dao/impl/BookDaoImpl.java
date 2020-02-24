@@ -56,7 +56,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
 		//将totalRecord赋值
 		page.setTotalRecord(count);
 		
-		String sql1 = "select id,title,author,price,sales,stock,img_path from books where 1=1 limit";
+		String sql1 = "select id,title,author,price,sales,stock,img_path from books where 1=1 limit ? , ?";
 		List<Book> list = this.getBeanList(sql1, (page.getPageNo()-1)*Page.PAGE_SIZE ,Page.PAGE_SIZE);
 		page.setList(list);
 		

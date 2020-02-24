@@ -18,6 +18,14 @@
 				return false;
 			}
 		});
+		
+		//实现确定按钮分页查询
+		$("#sub_page").click(function(){
+			//取pageNo值
+			var pageNo = $("#pn_input").val();
+			//请求BookServlet
+			location = "BookServlet?method=getBooksByPage&pageNo="+pageNo;
+		});
 	});
 </script>
 </head>
@@ -39,7 +47,7 @@
 				<td>库存</td>
 				<td colspan="2">操作</td>
 			</tr>		
-			<c:forEach items="${requestScope.books}" var="book">
+			<c:forEach items="${requestScope.page.list}" var="book">
 				<tr>
 					<td>${book.title }</td>
 					<td>${book.price }</td>
@@ -63,6 +71,23 @@
 				<td><a href="pages/manager/book_update.jsp">添加图书</a></td>
 			</tr>	
 		</table>
+		
+		<br>
+		<br>
+		
+		<div id="page_nav">
+			<a href="BookServlet?method=getBooksByPage&pageNo=1">首页</a>
+			<c:if test="${page.pageNo>1 }">
+				<a href="BookServlet?method=getBooksByPage&pageNo=${page.pageNo-1 }">上一页</a>
+			</c:if>
+			<c:if test="${page.pageNo<page.totalPageNo }">
+				<a href="BookServlet?method=getBooksByPage&pageNo=${page.pageNo+1 }">下一页</a>
+			</c:if>
+			<a href="BookServlet?method=getBooksByPage&pageNo=${requestScope.page.totalPageNo}">末页</a>
+			共${requestScope.page.pageNo}/${requestScope.page.totalPageNo}页，${requestScope.page.totalRecord}条记录 
+			到第<input value="${requestScope.page.pageNo }" name="pn" id="pn_input"/>页
+			<input id="sub_page" type="button" value="确定">
+		</div>
 	</div>
 	
 	<div id="bottom">

@@ -3,6 +3,7 @@ package com.hr.service;
 import java.util.List;
 
 import com.hr.bean.Book;
+import com.hr.bean.Page;
 
 public interface BookService {
 
@@ -19,4 +20,7 @@ public interface BookService {
 	
 	//修改图书
 	public void updateBook(Book book);
+	
+	//分页查询
+	public Page<Book> getBookByPage(String pageNo);
 }
