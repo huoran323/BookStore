@@ -59,4 +59,14 @@
     <servlet-name>BookServlet</servlet-name>
     <url-pattern>/BookServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BookClientServlet</display-name>
+    <servlet-name>BookClientServlet</servlet-name>
+    <servlet-class>com.hr.servlet.BookClientServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BookClientServlet</servlet-name>
+    <url-pattern>/BookClientServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
