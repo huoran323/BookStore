@@ -19,6 +19,13 @@ public class BookClientServlet extends BaseServlet {
 	
 	private BookService bookService = new BookServiceImpl();
        
+	/**
+	 * 客户端的分页查询
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void getBooksByPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String pageNo = request.getParameter("pageNo");
@@ -27,4 +34,21 @@ public class BookClientServlet extends BaseServlet {
 		request.getRequestDispatcher("/pages/client/book_client.jsp").forward(request, response);
 	}
 
+	/**
+	 * 带价格区间的分页查询
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void getBooksByPageAndPrice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String pageNo = request.getParameter("pageNo");
+		String min = request.getParameter("min");
+		String max = request.getParameter("max");
+		
+		Page<Book> page = bookService.getBookByPageAndPrice(pageNo, min, max);
+		request.setAttribute("page", page);
+		request.getRequestDispatcher("/pages/client/book_client.jsp").forward(request, response);
+	}
 }

@@ -63,4 +63,21 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
 		return page;
 	}
 
+	@Override
+	public Page<Book> getBooksByPageAndPrice(Page<Book> page, double min, double max) {
+		
+		// 获取totalRecord
+		String sql = "select count(*) from books where 1=1 and price between ? and ?";
+		//通过+""，装换为string，再装换为int
+		int count = Integer.parseInt(this.getSingleValue(sql, min, max)+"");
+		//将totalRecord赋值
+		page.setTotalRecord(count);
+		
+		String sql1 = "select id,title,author,price,sales,stock,img_path from books where 1=1 and price between ? and ? limit ? , ?";
+		List<Book> list = this.getBeanList(sql1, min, max, (page.getPageNo()-1)*Page.PAGE_SIZE ,Page.PAGE_SIZE);
+		page.setList(list);
+		
+		return page;
+	}
+
 }

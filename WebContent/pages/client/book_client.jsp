@@ -8,9 +8,21 @@
 <%@ include file="/WEB-INF/include/base.jsp" %>
 <script type="text/javascript">
 	$(function(){
+		//实现确定按钮分页查询
 		$("#sub_page").click(function() {
 			var page = $("#pn_input").val();
-			location = "BookClientServlet?method=getBooksByPage&pageNo="+page;
+			var min = $("input[name='min']").val();
+			var max = $("input[name='max']").val();
+			location = "BookClientServlet?method=getBooksByPageAndPrice&pageNo="+page+"&min="+min+"&max="+max;
+		});
+		
+		//带价格区间的分页查询
+		$(".book_cond :button").click(function(){
+			//去pageNo,min,max值
+			var page = $("#pn_input").val();
+			var min = $("input[name='min']").val();
+			var max = $("input[name='max']").val();
+			location = "BookClientServlet?method=getBooksByPageAndPrice&pageNo="+page+"&min="+min+"&max="+max;
 		});
 	});
 </script>
@@ -26,7 +38,7 @@
 	<div id="main">
 		<div id="book">
 			<div class="book_cond">
-				价格：<input type="text" name="min"> 元 - <input type="text" name="max"> 元 <button>查询</button>
+				价格：<input type="text" name="min" value="${param.min }"> 元 - <input type="text" name="max" value="${param.max }"> 元 <button>查询</button>
 			</div>
 			<div style="text-align: center">
 				<span>您的购物车中有3件商品</span>
@@ -92,7 +104,7 @@
 					【${i }】
 				</c:if>
 				<c:if test="${page.pageNo != i }">
-					<a href="BookClientServlet?method=getBooksByPage&pageNo=${i }">${i }</a>
+					<a href="BookClientServlet?method=getBooksByPageAndPrice&pageNo=${i }&min=${param.min}&max=${param.max}">${i }</a>
 				</c:if>
 			</c:forEach>
 			共${page.pageNo }/${page.totalPageNo }页，${page.totalRecord }条记录 到第<input value="${page.pageNo }" name="pn" id="pn_input"/>页

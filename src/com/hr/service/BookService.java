@@ -23,4 +23,7 @@ public interface BookService {
 	
 	//分页查询
 	public Page<Book> getBookByPage(String pageNo);
+	
+	//带价格区间的分页查询
+	public Page<Book> getBookByPageAndPrice(String pageNo, String min, String max);
 }

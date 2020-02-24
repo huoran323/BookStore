@@ -34,4 +34,9 @@ public interface BookDao {
 	 * 实现分页查询Book
 	 */
 	public Page<Book> getBooksByPage(Page<Book> page);
+	
+	/**
+	 * 实现带价格区间的分页查询
+	 */
+	public Page<Book> getBooksByPageAndPrice(Page<Book> page, double min, double max);
 }
