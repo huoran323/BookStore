@@ -1,2 +1,0 @@
-# BookStore
-First JavaWeb Project
