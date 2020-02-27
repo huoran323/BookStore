@@ -74,4 +74,18 @@ public class UserServlet extends BaseServlet {
 			response.sendRedirect(request.getContextPath() + "/pages/user/regist_success.jsp");
 		}
 	}
+	
+	/**
+	 * 注销
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//将user从session域中移除
+		request.getSession().removeAttribute("user");
+		//跳转首页
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
+	}
 }
