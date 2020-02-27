@@ -28,6 +28,12 @@
 			
 		});
 		
+		//刷新验证码
+		$("#codeImg").click(function(){
+			//通过$给属性赋值,添加随机数，使每次的属性值不一样，解决不同浏览器的兼容问题
+			$(this).attr("src","code.jpg?random="+Math.random());
+		});
+		
 	});
 </script>
 <link type="text/css" rel="stylesheet" href="static/css/style.css" >
@@ -80,8 +86,8 @@
 									<br />
 									<br />
 									<label>验证码：</label>
-									<input class="itxt" type="text" style="width: 150px;" id="code"/>
-									<img alt="" src="code.jpg" style="float: right; margin-right: 40px; width: 80px; height: 40px; ">									
+									<input class="itxt" type="text" style="width: 150px;" name="code" id="code"/>
+									<img id="codeImg" alt="" src="code.jpg" style="float: right; margin-right: 40px; width: 80px; height: 40px; ">									
 									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />

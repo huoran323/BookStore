@@ -57,22 +57,35 @@ public class UserServlet extends BaseServlet {
 	 */
 	protected void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
 		//取值
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
-		//调用service中的方法
-		boolean yOn = userService.checkUserName(username);
-		if (yOn) {
-			//用户名存在,转发
-			request.setAttribute("msg", "用户名已存在，请重新输入！");
-			request.getRequestDispatcher("/pages/user/regist.jsp").forward(request, response);
+		//获取验证码
+		String code = request.getParameter("code");
+		//获取session域中的验证码文本
+		Object code2 = session.getAttribute("KAPTCHA_SESSION_KEY");
+		//判断验证码输入是否正确
+		if (code2 != null && code2.toString().equals(code)) {
+			//调用service中的方法
+			boolean yOn = userService.checkUserName(username);
+			if (yOn) {
+				//用户名存在,转发
+				request.setAttribute("msg", "用户名已存在，请重新输入！");
+				request.getRequestDispatcher("/pages/user/regist.jsp").forward(request, response);
+			} else {
+				//用户名不存在，saveUser();
+				userService.saveUser(new User(null, username, password, email));
+				//重定向
+				response.sendRedirect(request.getContextPath() + "/pages/user/regist_success.jsp");
+			}
 		} else {
-			//用户名不存在，saveUser();
-			userService.saveUser(new User(null, username, password, email));
-			//重定向
-			response.sendRedirect(request.getContextPath() + "/pages/user/regist_success.jsp");
+			//验证码不正确
+			request.setAttribute("msg", "验证码错误，请重新输入！");
+			request.getRequestDispatcher("/pages/user/regist.jsp").forward(request, response);
 		}
+		
 	}
 	
 	/**
