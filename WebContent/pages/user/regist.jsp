@@ -81,7 +81,7 @@
 									<br />
 									<label>验证码：</label>
 									<input class="itxt" type="text" style="width: 150px;" id="code"/>
-									<img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">									
+									<img alt="" src="code.jpg" style="float: right; margin-right: 40px; width: 80px; height: 40px; ">									
 									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />
