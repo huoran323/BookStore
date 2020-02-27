@@ -70,11 +70,21 @@
     <url-pattern>/BookClientServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>KaptchaServlet</servlet-name>
-  	<servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    <servlet-name>KaptchaServlet</servlet-name>
+    <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>KaptchaServlet</servlet-name>
-  	<url-pattern>/code.jpg</url-pattern>
+    <servlet-name>KaptchaServlet</servlet-name>
+    <url-pattern>/code.jpg</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartServlet</display-name>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>com.hr.servlet.CartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/CartServlet</url-pattern>
   </servlet-mapping>
 </web-app>

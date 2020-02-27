@@ -24,6 +24,14 @@
 			var max = $("input[name='max']").val();
 			location = "BookClientServlet?method=getBooksByPageAndPrice&pageNo="+page+"&min="+min+"&max="+max;
 		});
+		
+		//添加book到cart
+		$(".book_add button").click(function() {
+			//取bookid值
+			var bookId = $(this).attr("id");
+			//调用CartServlet
+			location = "CartServlet?method=addBookToCart&bookId="+bookId;
+		});
 	});
 </script>
 </head>
@@ -41,10 +49,16 @@
 				价格：<input type="text" name="min" value="${param.min }"> 元 - <input type="text" name="max" value="${param.max }"> 元 <button>查询</button>
 			</div>
 			<div style="text-align: center">
-				<span>您的购物车中有3件商品</span>
-				<div>
-					您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
-				</div>
+				<c:if test="${not empty sessionScope.cart.totalCount && sessionScope.cart.totalCount != 0 }">
+					<span>您的购物车中有${sessionScope.cart.totalCount }件商品</span>
+				</c:if>
+				<c:if test="${not empty sessionScope.title}">
+					<div>
+						您刚刚将<span style="color: red">${sessionScope.title }</span>加入到了购物车中
+					</div>
+				</c:if>
+				<c:remove var="title"/>
+				
 			</div>
 			<c:forEach items="${requestScope.page.list }" var="book">
 				<div class="b_list">
@@ -73,7 +87,8 @@
 						<span class="sp2">${book.stock }</span>
 					</div>
 					<div class="book_add">
-						<button>加入购物车</button>
+					<!-- 把每一个book的id存放到此处，点击按钮的时候便于获取 -->
+						<button id="${book.id }">加入购物车</button>
 					</div>
 				</div>
 			</div>
