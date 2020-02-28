@@ -1,13 +1,19 @@
 package com.hr.bean;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Cart {
+public class Cart implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//购物项集合, key:bookId , value:CartItem
 	private Map<String,CartItem> map = new LinkedHashMap<>();
 	//总商品数量
@@ -68,11 +74,14 @@ public class Cart {
 	 * @return
 	 */
 	public double getTotalAmount() {
-		int totalAmount = 0;
+		BigDecimal tAmount = new BigDecimal("0");
+//		int totalAmount = 0;
 		for(CartItem cartItem : getCartItems()) {
-			totalAmount += cartItem.getAmount();
+			BigDecimal amount = new BigDecimal(cartItem.getAmount()+"");
+			tAmount = tAmount.add(amount); //解决double相加运算精度的问题
+//			totalAmount += cartItem.getAmount();
 		}
-		return totalAmount;
+		return tAmount.doubleValue();
 	}
 	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;

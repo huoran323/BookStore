@@ -43,8 +43,10 @@ public class CartServlet extends BaseServlet {
 		cart.addBookToCart(book);
 		//将title存放到session域中,用来显示
 		session.setAttribute("title", book.getTitle());
+		//获取Referer:跳转 请求头中的Referer属性保存的是上一次的请求 , 防止添加购物车后页码回到第一页
+		String url = request.getHeader("Referer");
 		//跳转
-		response.sendRedirect(request.getContextPath()+"/index.jsp");
+		response.sendRedirect(url);
 	}
 
 }
