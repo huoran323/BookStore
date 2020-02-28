@@ -87,4 +87,17 @@
     <servlet-name>CartServlet</servlet-name>
     <url-pattern>/CartServlet</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>CharSetFilter</display-name>
+    <filter-name>CharSetFilter</filter-name>
+    <filter-class>com.hr.filter.CharSetFilter</filter-class>
+    <init-param>
+    	<param-name>code</param-name>
+    	<param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
