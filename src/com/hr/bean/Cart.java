@@ -42,6 +42,14 @@ public class Cart implements Serializable {
 	}
 	
 	/**
+	 * 删除购物项
+	 * @param bookId
+	 */
+	public void delCartItem(String bookId) {
+		map.remove(bookId);
+	}
+	
+	/**
 	 * 获取所有的CartItems
 	 * @return
 	 */

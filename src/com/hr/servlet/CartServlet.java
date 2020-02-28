@@ -48,5 +48,23 @@ public class CartServlet extends BaseServlet {
 		//跳转
 		response.sendRedirect(url);
 	}
+	
+	/**
+	 * 删除购物项
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void delCartItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		String bookId = request.getParameter("bookId");
+		Cart cart = (Cart)session.getAttribute("cart");
+		if (cart != null) {
+			cart.delCartItem(bookId);
+		}
+		response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
+	}
 
 }
