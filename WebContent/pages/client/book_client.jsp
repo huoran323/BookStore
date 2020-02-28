@@ -52,12 +52,20 @@
 				<c:if test="${not empty sessionScope.cart.totalCount && sessionScope.cart.totalCount != 0 }">
 					<span>您的购物车中有${sessionScope.cart.totalCount }件商品</span>
 				</c:if>
-				<c:if test="${not empty sessionScope.title}">
-					<div>
-						您刚刚将<span style="color: red">${sessionScope.title }</span>加入到了购物车中
-					</div>
-				</c:if>
-				<c:remove var="title"/>
+				<div>
+					<c:if test="${not empty sessionScope.title}">
+						<div>
+							您刚刚将<span style="color: red">${sessionScope.title }</span>加入到了购物车中
+						</div>
+					</c:if>
+					<c:remove var="title" scope="session"/>
+					<c:if test="${not empty sessionScope.msg}">
+						<div>
+							<span style="color: red">${sessionScope.msg }</span>
+						</div>
+					</c:if>
+					<c:remove var="title" scope="session"/>
+				</div>
 				
 			</div>
 			<c:forEach items="${requestScope.page.list }" var="book">

@@ -41,8 +41,18 @@ public class CartServlet extends BaseServlet {
 			session.setAttribute("cart", cart);
 		}
 		cart.addBookToCart(book);
-		//将title存放到session域中,用来显示
-		session.setAttribute("title", book.getTitle());
+		//验证库存
+		Integer stock = book.getStock();//获取库存
+		int count = cart.getMap().get(book.getId()+"").getCount(); //获取购买的数量
+		if (count > stock) {
+			//库存不足
+			session.setAttribute("msg", "库存不足，只剩"+stock+"件商品！");
+			//将购买商品的数量，设置为最大库存
+			cart.getMap().get(book.getId()+"").setCount(stock);
+		} else {
+			//将title存放到session域中,用来显示
+			session.setAttribute("title", book.getTitle());
+		}
 		//获取Referer:跳转 请求头中的Referer属性保存的是上一次的请求 , 防止添加购物车后页码回到第一页
 		String url = request.getHeader("Referer");
 		//跳转

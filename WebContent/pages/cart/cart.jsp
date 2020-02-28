@@ -9,8 +9,28 @@
 <script type="text/javascript">
 	$(function() {
 		$(".cartItemCount").change(function(){
-			var bookId = $(this).attr("name");
+			//获取默认值
+			var dValue = $(this).defaultValue;
+			
+			var bookId = $(this).attr("id");
 			var count = $(this).val();
+			//定义正则规则(非0的正整数)
+			var countReg = /^\+?[1-9][0-9]*$/;
+			if (!countReg.test(count)) {
+				alert("购买数量输入有误！请重新输入");
+				$(this).val(dValue);
+				return false;
+			}
+			
+			//校验库存
+			//获取库存
+			var stock = $(this).attr("name");
+			if (parseInt(count)>parseInt(stock)){
+				alert("库存不足！库存只剩"+stock+"件商品啦！");
+				$(this).val(dValue);
+				return false;
+			}
+			
 			location = "CartServlet?method=updateCartItemCount&bookId="+bookId+"&count="+count;
 		});
 	});
@@ -41,7 +61,7 @@
 					<tr>
 						<td>${cartItem.book.title }</td>
 						<td>
-							<input type="text" class="cartItemCount" name="${cartItem.book.id }" value="${cartItem.count }" size="3" style="text-align: center" />	
+							<input type="text" class="cartItemCount" name="${cartItem.book.stock }" id="${cartItem.book.id }" value="${cartItem.count }" size="3" style="text-align: center" />	
 						</td>
 						<td>${cartItem.book.price }</td>
 						<td>${cartItem.amount }</td>
