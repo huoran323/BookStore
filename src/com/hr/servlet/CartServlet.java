@@ -67,4 +67,39 @@ public class CartServlet extends BaseServlet {
 		response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
 	}
 
+	/**
+	 * 清空购物车
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void emptyCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		Cart cart = (Cart)session.getAttribute("cart");
+		if (cart != null) {
+			cart.emptyCart();
+		}
+		response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
+	}
+	
+	/**
+	 * 修改购物项的数量
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void updateCartItemCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		HttpSession session = request.getSession();
+		String bookId = request.getParameter("bookId");
+		String count = request.getParameter("count");
+		Cart cart = (Cart)session.getAttribute("cart");
+		if (cart != null) {
+			cart.updateCartItemCount(bookId, count);
+		}
+		response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
+	}
 }

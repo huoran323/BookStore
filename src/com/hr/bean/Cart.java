@@ -50,6 +50,24 @@ public class Cart implements Serializable {
 	}
 	
 	/**
+	 * 清空购物车
+	 */
+	public void emptyCart() {
+		map.clear();
+	}
+	
+	/**
+	 * 修改购物项的数量
+	 * @param bookId
+	 * @param count
+	 */
+	public void updateCartItemCount(String bookId, String count) {
+		//通过bookId查找指定的CartItem
+		CartItem cartItem = map.get(bookId);
+		cartItem.setCount(Integer.parseInt(count));
+	}
+	
+	/**
 	 * 获取所有的CartItems
 	 * @return
 	 */
