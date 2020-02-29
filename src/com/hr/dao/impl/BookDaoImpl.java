@@ -45,6 +45,13 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
 		String sql = "update books set title=?, author=?, price=?, sales=?, stock=? where id=?";
 		this.update(sql, book.getTitle(), book.getAuthor(), book.getPrice(), book.getSales(), book.getStock(), book.getId());
 	}
+	
+	@Override
+	public void updateBook(int stock, int sales, int id) {
+		
+		String sql = "update books set sales=?, stock=? where id=?";
+		this.update(sql, sales, stock, id);
+	}
 
 	@Override
 	public Page<Book> getBooksByPage(Page<Book> page) {

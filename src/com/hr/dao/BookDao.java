@@ -31,6 +31,11 @@ public interface BookDao {
 	public void updateBook(Book book);
 	
 	/**
+	 * 重载修改Book的销量和库存
+	 */
+	public void updateBook(int stock, int sales, int id);
+	
+	/**
 	 * 实现分页查询Book
 	 */
 	public Page<Book> getBooksByPage(Page<Book> page);
