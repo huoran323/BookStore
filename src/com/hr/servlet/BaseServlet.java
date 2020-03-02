@@ -25,7 +25,9 @@ public class BaseServlet extends HttpServlet {
 			method2.invoke(this, request,response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			//处理事务，统一处理异常
+			throw new RuntimeException(e);
 		}
 		
 //		if("login".equals(method)) {

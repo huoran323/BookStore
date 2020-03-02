@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 	public String createOrder(Cart cart, User user) {
 		//1.生成订单
 		//orderId=时间戳+userid
-		String orderId = System.currentTimeMillis()+""+user.getId();
+		String orderId = System.currentTimeMillis()+""+user.getId(); 
 		orderDao.insertOrder(new Order(orderId, new Date(), cart.getTotalCount(), cart.getTotalAmount(), 0, user.getId()));
 		
 		//获取所有购物项

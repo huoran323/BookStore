@@ -19,6 +19,11 @@ import com.hr.bean.User;
 public class CheckLoginFilter extends HttpFilter implements Filter {
        
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		//判断是否登录
