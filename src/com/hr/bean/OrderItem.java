@@ -1,7 +1,13 @@
 package com.hr.bean;
 
-public class OrderItem {
+import java.io.Serializable;
 
+public class OrderItem implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id; //订单项id
 	private int count; //买了多少本书
 	private double amount; //买了count本图书花费的钱数

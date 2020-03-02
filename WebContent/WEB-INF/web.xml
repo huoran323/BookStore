@@ -110,4 +110,13 @@
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/OrderServlet</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>CheckLoginFilter</display-name>
+    <filter-name>CheckLoginFilter</filter-name>
+    <filter-class>com.hr.filter.CheckLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CheckLoginFilter</filter-name>
+    <url-pattern>/OrderServlet</url-pattern>
+  </filter-mapping>
 </web-app>

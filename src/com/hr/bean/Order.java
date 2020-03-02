@@ -1,9 +1,14 @@
 package com.hr.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id; //订单号
 	private Date orderTime; //生成订单的时间
 	private int totalCount; //商品总数量
