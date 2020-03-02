@@ -1,6 +1,7 @@
 package com.hr.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
 import javax.servlet.ServletException;
@@ -100,5 +101,21 @@ public class UserServlet extends BaseServlet {
 		request.getSession().removeAttribute("user");
 		//跳转首页
 		response.sendRedirect(request.getContextPath()+"/index.jsp");
+	}
+	
+	/**
+	 * 校验用户名
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void checkUserName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter writer = response.getWriter();
+		String username = request.getParameter("username");
+		boolean yOn = userService.checkUserName(username);
+		System.out.println(yOn);
+//		writer.print(yOn);
+		writer.write("hshs");
 	}
 }
