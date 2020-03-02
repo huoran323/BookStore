@@ -32,18 +32,38 @@ public class OrderServiceImpl implements OrderService {
 		
 		//获取所有购物项
 		List<CartItem> cartItems = cart.getCartItems();
-		//遍历购物项，添加到订单详情
-		for(CartItem cartItem : cartItems) {
+		//新建二维数组，批处理
+		Object[][] orderItemParams = new Object[cartItems.size()][];
+		Object[][] bookParams = new Object[cartItems.size()][];
+		for(int i=0;i<cartItems.size();i++) {
+			CartItem cartItem = cartItems.get(i);
 			//2.生成订单详情
 			Book book = cartItem.getBook();
 			int count = cartItem.getCount(); //购买的数量
-			orderItemDao.insertOrderItem(new OrderItem(null, count, cartItem.getAmount(), book.getTitle(), book.getAuthor(), book.getPrice(), book.getImgPath(), orderId));
+			
+			//orderItemParams第二维度赋值
+			orderItemParams[i] = new Object[]{count, cartItem.getAmount(), book.getTitle(), book.getAuthor(), book.getPrice(), book.getImgPath(), orderId};
 			
 			//3.更改相应book的库存和销量
 			int stock = book.getStock() - count; //剩余库存
 			int sales = book.getSales() + count; //目前销量
-			bookDao.updateBook(stock, sales, book.getId());
+			bookParams[i] = new Object[] {sales,stock, book.getId()};
 		}
+		orderItemDao.insertOrderItem(orderItemParams);
+		bookDao.updateBook(bookParams);
+		
+		//遍历购物项，添加到订单详情
+//		for(CartItem cartItem : cartItems) {
+//			//2.生成订单详情
+//			Book book = cartItem.getBook();
+//			int count = cartItem.getCount(); //购买的数量
+//			//orderItemDao.insertOrderItem(new OrderItem(null, count, cartItem.getAmount(), book.getTitle(), book.getAuthor(), book.getPrice(), book.getImgPath(), orderId));
+
+//			//3.更改相应book的库存和销量
+//			int stock = book.getStock() - count; //剩余库存
+//			int sales = book.getSales() + count; //目前销量
+//			bookDao.updateBook(stock, sales, book.getId());
+//		}
 		
 		//4.清空购物车
 		cart.emptyCart();

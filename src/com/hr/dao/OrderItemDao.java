@@ -9,4 +9,10 @@ public interface OrderItemDao {
 	 * @param orderItem
 	 */
 	void insertOrderItem(OrderItem orderItem);
+	
+	/**
+	 * 批处理
+	 * @param params
+	 */
+	void insertOrderItem(Object[][] params);
 }

@@ -54,6 +54,13 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
 	}
 
 	@Override
+	public void updateBook(Object[][] params) {
+		
+		String sql = "update books set sales=?, stock=? where id=?";
+		this.batchUpdate(sql, params);
+	}
+
+	@Override
 	public Page<Book> getBooksByPage(Page<Book> page) {
 		
 		// 获取totalRecord
@@ -86,5 +93,6 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
 		
 		return page;
 	}
+
 
 }

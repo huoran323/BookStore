@@ -60,6 +60,26 @@ public class BaseDao<T> {
 		}
 		return count;
 	}
+	
+	/**
+	 * 通用的批处理增删改操作
+	 * 
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public void batchUpdate(String sql, Object[][] params) {
+		
+		// 获取连接
+		Connection connection = JDBCUtils.getConnection();
+		try {
+			queryRunner.batch(connection, sql, params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.releaseConnection(connection);
+		}
+	}
 
 	/**
 	 * 获取一个对象
