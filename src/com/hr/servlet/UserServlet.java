@@ -114,8 +114,6 @@ public class UserServlet extends BaseServlet {
 		PrintWriter writer = response.getWriter();
 		String username = request.getParameter("username");
 		boolean yOn = userService.checkUserName(username);
-		System.out.println(yOn);
-//		writer.print(yOn);
-		writer.write("hshs");
+		writer.print(yOn);
 	}
 }

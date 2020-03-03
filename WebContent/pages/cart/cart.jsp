@@ -10,13 +10,14 @@
 	$(function() {
 		$(".cartItemCount").change(function(){
 			//获取默认值
-			var dValue = $(this).defaultValue;
+			var dValue = $(this)[0].defaultValue;
 			
 			var bookId = $(this).attr("id");
 			var count = $(this).val();
 			//定义正则规则(非0的正整数)
 			var countReg = /^\+?[1-9][0-9]*$/;
 			if (!countReg.test(count)) {
+			
 				alert("购买数量输入有误！请重新输入");
 				$(this).val(dValue);
 				return false;
@@ -26,12 +27,20 @@
 			//获取库存
 			var stock = $(this).attr("name");
 			if (parseInt(count)>parseInt(stock)){
+				
 				alert("库存不足！库存只剩"+stock+"件商品啦！");
 				$(this).val(dValue);
 				return false;
 			}
 			
-			location = "CartServlet?method=updateCartItemCount&bookId="+bookId+"&count="+count;
+			//location = "CartServlet?method=updateCartItemCount&bookId="+bookId+"&count="+count;
+			var $amountTr = $(this).parent().next().next();
+			$.getJSON("CartServlet?method=updateCartItemCount",{"bookId":bookId,"count":count}, function(msg){
+				//将数据显示指定位置
+				$(".b_count").html(msg.totalCount);
+				$(".b_price").html(msg.totalAmount);
+				$amountTr.html(msg.amount);
+			});
 		});
 	});
 </script>

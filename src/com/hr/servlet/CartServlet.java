@@ -1,11 +1,15 @@
 package com.hr.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.hr.bean.Book;
 import com.hr.bean.Cart;
 import com.hr.service.BookService;
@@ -110,6 +114,20 @@ public class CartServlet extends BaseServlet {
 		if (cart != null) {
 			cart.updateCartItemCount(bookId, count);
 		}
-		response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
+//		response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
+		
+		//携带数据响应（回调函数）
+		int totalCount = cart.getTotalCount();
+		double totalAmount = cart.getTotalAmount();
+		double amount = cart.getMap().get(bookId).getAmount();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("totalCount", totalCount);
+		map.put("totalAmount", totalAmount);
+		map.put("amount", amount);
+		//将数据封装成json
+		Gson gson = new Gson();
+		String json = gson.toJson(map);
+		//响应
+		response.getWriter().write(json);
 	}
 }

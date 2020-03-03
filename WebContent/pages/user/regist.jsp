@@ -30,30 +30,26 @@
 		
 		//刷新验证码
 		$("#codeImg").click(function(){
+			
 			//通过$给属性赋值,添加随机数，使每次的属性值不一样，解决不同浏览器的兼容问题
 			$(this).attr("src","code.jpg?random="+Math.random());
 		});
 		
-		$('input[name="username"]').on('blur', function(){
-			var _this = $(this);
-			var vl = _this.val();
-			alert(vl);
-			
-		});
 		//ajax校验用户名是否存在
 		$("#username").change(function(){
 			//取username值
-			var username = $(this).val();
-			alert(username);
+			var uname = $(this).val();
 			//ajax异步请求
-			$.get("UserServlet?method=checkUserName",{"username":username}, function(msg){
-				if ($.trim(msg) == "true") {
+			$.get("UserServlet?method=checkUserName",{"username":uname},function(msg){
+				
+				if($.trim(msg) == "true"){
 					$(".errorMsg").html("用户名已存在，请重新输入！").css("color","red");
-				} elese {
+				}else{
 					$(".errorMsg").html("用户名可用！").css("color","green");
 				}
 			});
 		});
+		
 		
 	});
 </script>

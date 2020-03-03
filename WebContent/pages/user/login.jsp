@@ -41,7 +41,7 @@
 								<form action="UserServlet?method=login" method="post">
 									<!-- <input type="hidden" name="method" value="login"/> -->
 									<label>用户名称：</label>
-									<input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" />
+									<input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="username" id="username" />
 									<br />
 									<br />
 									<label>用户密码：</label>
